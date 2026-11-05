@@ -3,8 +3,8 @@ import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { HowWeWork } from './components/HowWeWork'
 import { Products } from './components/Products'
+import { Services } from './components/Services'
 import { Team } from './components/Team'
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
       <main id="main">
         <Hero />
         <CompanyIntro />
+        <Services />
         <Products />
-        <HowWeWork />
         <Team />
         <Contact />
       </main>

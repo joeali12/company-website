@@ -1,84 +1,68 @@
-import { scrollToSection } from '../lib/scroll'
+import { lazy, Suspense, useCallback, useState } from 'react'
+
+const PlanetScene = lazy(() =>
+  import('./hero/PlanetScene').then((module) => ({
+    default: module.PlanetScene,
+  })),
+)
 
 export function Hero() {
+  const [webglActive, setWebglActive] = useState(false)
+  const handleReady = useCallback(() => setWebglActive(true), [])
+  const handleFailed = useCallback(() => setWebglActive(false), [])
+
   return (
     <section
       id="home"
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden pt-[calc(var(--header-height)+2.5rem)] pb-20 sm:pb-28"
+      data-webgl={webglActive ? 'active' : 'fallback'}
+      className="hero-section @container relative flex min-h-[100svh] flex-col overflow-x-clip bg-black pt-[var(--header-height)]"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="hero-fallback-layer pointer-events-none absolute inset-0"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.16),transparent_55%),radial-gradient(ellipse_at_80%_20%,rgba(59,130,246,0.18),transparent_45%),linear-gradient(180deg,#0b1220_0%,#060b16_100%)]" />
-        <div className="absolute inset-x-0 top-24 mx-auto h-[28rem] w-[28rem] rounded-full bg-cyan-400/10 blur-[100px]" />
-        <div
-          className="absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(148,163,184,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.07) 1px, transparent 1px)',
-            backgroundSize: '72px 72px',
-            maskImage:
-              'radial-gradient(ellipse at center, black 20%, transparent 72%)',
-          }}
-        />
+        <div className="absolute inset-0 bg-[#020308]" />
+        <div className="hero-fallback-stars absolute inset-0 opacity-60 [background-image:radial-gradient(1px_1px_at_12%_20%,rgba(230,244,255,0.85),transparent),radial-gradient(1px_1px_at_30%_46%,rgba(170,210,255,0.5),transparent),radial-gradient(1px_1px_at_72%_18%,rgba(230,244,255,0.75),transparent),radial-gradient(1px_1px_at_86%_40%,rgba(103,232,249,0.45),transparent)]" />
+        <div className="hero-planet-fallback absolute -left-[18%] top-[18%] h-[140%] w-[150%] rounded-[50%] bg-[radial-gradient(circle_at_62%_28%,rgba(34,211,238,0.55),rgba(8,18,32,0.2)_18%,#05070c_42%,#000_70%)]" />
+        <div className="hero-beam absolute right-[6%] top-[8%] h-[70%] w-24 origin-top" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center px-5 text-center sm:px-8">
-        <p className="mb-6 inline-flex items-center rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.12)] sm:text-sm">
-          Focused on human-centered digital experiences
-        </p>
+      <Suspense fallback={null}>
+        <PlanetScene
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+          onReady={handleReady}
+          onFailed={handleFailed}
+        />
+      </Suspense>
 
-        <h1
-          id="hero-heading"
-          className="font-display text-[2.05rem] font-semibold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-[3.35rem]"
-        >
-          We build digital products that bring people closer to{' '}
-          <span className="text-gradient-cyan [text-shadow:0_0_40px_rgba(34,211,238,0.35)]">
-            what they need.
-          </span>
-        </h1>
-
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-soft sm:text-lg">
-          We create useful, thoughtful technology for learning, collaboration,
-          and everyday progress.
-        </p>
-
-        <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-          <button
-            type="button"
-            className="btn-primary inline-flex"
-            onClick={() => scrollToSection('products')}
-          >
-            Explore our products
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-              <path
-                d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="btn-ghost inline-flex"
-            onClick={() => scrollToSection('contact')}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-              <path
-                d="M3 4.5h10v7H3v-7Zm0 0 5 3.5 5-3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-            Talk to our team
-          </button>
+      <div className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col px-5 sm:px-10 lg:px-14">
+        <div className="mt-2 flex items-end justify-end border-t border-white/15 pt-3 sm:pt-4">
+          <p className="max-w-full text-right text-[0.62rem] font-medium uppercase tracking-[0.28em] text-white/55 sm:text-[0.7rem]">
+            ERP · SaaS · Websites · Applications
+          </p>
         </div>
+
+        <div className="flex flex-1 items-center py-6 sm:py-8">
+          <div>
+            <h1
+              id="hero-heading"
+              className="font-display text-[clamp(2.15rem,6.4cqi,6.35rem)] font-semibold leading-[0.9] tracking-[-0.045em] text-white"
+            >
+              <span className="block">We build</span>
+              <span className="block">
+                software that powers{' '}
+                <span className="hero-brand">VOLT IQ</span>
+              </span>
+            </h1>
+            <p className="mt-5 max-w-[34rem] font-display text-base font-medium leading-snug tracking-[-0.02em] text-white/75 sm:mt-6 sm:text-lg">
+              Digital solutions for people and businesses — ERP systems, SaaS
+              products, and websites.
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t border-white/15" />
       </div>
     </section>
   )

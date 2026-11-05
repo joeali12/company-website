@@ -1,4 +1,5 @@
-import { COMPANY_NAME, LEGAL_ENTITY_NAME, NAV_LINKS } from '../data/site'
+import type { MouseEvent } from 'react'
+import { COMPANY_NAME, NAV_LINKS } from '../data/site'
 import { handleNavClick } from '../lib/scroll'
 
 const FOOTER_LINKS = NAV_LINKS.filter((link) => link.id !== 'home')
@@ -6,74 +7,51 @@ const FOOTER_LINKS = NAV_LINKS.filter((link) => link.id !== 'home')
 const COPYRIGHT_YEAR = 2026
 
 export function Footer() {
+  const go = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    handleNavClick(event, id)
+  }
+
   return (
-    <footer className="border-t border-white/10 bg-navy-900 px-5 pb-8 pt-14 sm:px-8">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <span
-              aria-hidden="true"
-              className="grid h-8 w-8 place-items-center rounded-lg border border-cyan-400/30 bg-navy-800 text-cyan-300"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M3 13V3h2.1l2.7 5.1L10.5 3H12.6v10h-1.8V7.4L8.5 12H7L4.8 7.4V13H3z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-            <span className="font-display text-sm font-semibold text-white">
-              {COMPANY_NAME}
-            </span>
+    <footer className="border-t border-white/10 bg-navy-950 px-5 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="grid border border-white/10 md:grid-cols-12">
+          <nav
+            aria-label="Footer"
+            className="border-b border-white/10 md:col-span-5 md:border-r md:border-b-0"
+          >
+            <p className="px-6 pt-6 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-cyan-300/80 sm:px-8 sm:pt-8">
+              Index
+            </p>
+            <ol className="mt-4">
+              {FOOTER_LINKS.map((link, index) => (
+                <li key={link.id} className="border-t border-white/10">
+                  <a
+                    href={`#${link.id}`}
+                    onClick={(event) => go(event, link.id)}
+                    className="flex min-h-12 cursor-pointer items-center justify-between gap-4 px-6 py-3 transition-colors duration-200 hover:bg-white/[0.03] sm:px-8"
+                  >
+                    <span className="font-display text-base font-medium text-white">
+                      {link.label}
+                    </span>
+                    <span className="font-display text-xs tracking-[0.18em] text-cyan-300/70">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          <div className="flex flex-col justify-between gap-10 px-6 py-8 sm:px-8 sm:py-10 md:col-span-7 md:px-12">
+            <p className="max-w-xl font-display text-2xl font-semibold leading-snug tracking-[-0.03em] text-white sm:text-3xl">
+              {COMPANY_NAME} builds digital solutions for people and businesses,
+              including ERP systems, SaaS products, and websites.
+            </p>
+            <p className="text-xs tracking-[0.16em] text-slate-muted uppercase">
+              © {COPYRIGHT_YEAR} {COMPANY_NAME}
+            </p>
           </div>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-soft">
-            Building thoughtful digital products for learning and beyond.
-          </p>
         </div>
-
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-muted">
-            Navigation
-          </h2>
-          <ul className="mt-4 space-y-2">
-            {FOOTER_LINKS.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  onClick={(event) => handleNavClick(event, link.id)}
-                  className="text-sm text-slate-soft transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-muted">
-            Legal
-          </h2>
-          <ul className="mt-4 space-y-2 text-sm text-slate-soft">
-            <li>
-              <span className="text-slate-muted">
-                Privacy Policy — [add when available]
-              </span>
-            </li>
-            <li>
-              <span className="text-slate-muted">
-                Terms of Service — [add when available]
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="mx-auto mt-12 flex w-full max-w-6xl flex-col gap-2 border-t border-white/10 pt-6 text-xs text-slate-muted sm:flex-row sm:items-center sm:justify-between">
-        <p>
-          © {COPYRIGHT_YEAR} {LEGAL_ENTITY_NAME}. All rights reserved.
-        </p>
-        <p>Single-page company website</p>
       </div>
     </footer>
   )

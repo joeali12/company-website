@@ -7,50 +7,49 @@ export function Products() {
 
   return (
     <section
-      id="products"
+      id="projects"
       ref={ref}
-      aria-labelledby="products-heading"
-      className="section-reveal relative px-5 py-16 sm:px-8 sm:py-24"
+      aria-labelledby="projects-heading"
+      className="section-reveal section-shell"
     >
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 max-w-2xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-            Portfolio &amp; tools
+          <p className="hero-brand mb-3 text-sm font-semibold uppercase tracking-[0.18em]">
+            Projects
           </p>
           <h2
-            id="products-heading"
+            id="projects-heading"
             className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Products made for real needs
+            Our first project
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-soft sm:text-lg">
-            We turn everyday challenges into clear, approachable digital
-            experiences.
-          </p>
         </div>
 
-        <article className="surface-card overflow-hidden rounded-3xl">
+        <article className="surface-card stagger-item overflow-hidden rounded-3xl">
           <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10 lg:p-12">
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
-                Featured product
+                Education platform
               </p>
               <h3 className="font-display text-3xl font-semibold text-white">
-                Educore
+                EduCore
               </h3>
-              <p className="mt-3 text-lg font-medium text-ink/90">
-                Learning works better when people stay connected.
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft">
+                EduCore is our first project: an education platform designed to
+                bring learning operations and teaching tools into one connected
+                workspace.
               </p>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft">
-                A digital learning space designed to help students and educators
-                stay connected and keep learning activities organized.
+                We’re building EduCore around the needs of teachers and learning
+                communities, with a focus on keeping learning activities and
+                information organized.
               </p>
               <button
                 type="button"
-                className="btn-primary mt-8 inline-flex"
+                className="btn-primary mt-8"
                 onClick={() => scrollToSection('contact')}
               >
-                Get in touch about Educore
+                Discuss a project
               </button>
             </div>
 

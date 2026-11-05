@@ -1,9 +1,9 @@
-/** Illustrative visual only — not a product screenshot. */
+/** Abstract concept visual only — not a product screenshot. */
 export function EducorePreview() {
   return (
     <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-navy-950/70 p-4 sm:p-5">
       <figcaption className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-slate-muted">
-        Illustrative product preview
+        Concept preview
       </figcaption>
 
       <div

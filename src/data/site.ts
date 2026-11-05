@@ -1,15 +1,10 @@
-/**
- * Editable site placeholders.
- * Replace bracketed values with real company details when available.
- * Do not present placeholders as verified facts in marketing copy elsewhere.
- */
-export const COMPANY_NAME = '[Company name]'
-export const LEGAL_ENTITY_NAME = '[Legal company name]'
+export const COMPANY_NAME = 'VOLT IQ'
 
 export const NAV_LINKS = [
   { id: 'home', label: 'Home' },
-  { id: 'products', label: 'Products' },
   { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
+  { id: 'projects', label: 'Projects' },
   { id: 'team', label: 'Team' },
   { id: 'contact', label: 'Contact' },
 ] as const
@@ -18,41 +13,81 @@ export type TeamMember = {
   id: string
   name: string
   role: string
-  bio: string
-  accent: 'violet' | 'cyan' | 'amber' | 'teal'
+  linkedin: string
+  accent: 'blue' | 'cyan' | 'teal' | 'sky'
+  initials: string
 }
 
-/**
- * Placeholder team profiles only.
- * Replace with real people when confirmed. Do not invent identities.
- */
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'member-1',
-    name: '[Name]',
-    role: '[Role]',
-    bio: '[Short bio]',
-    accent: 'violet',
+    id: 'amar-swar',
+    name: 'Amar Swar',
+    role: 'Data Engineer & Database Specialist',
+    linkedin: 'https://www.linkedin.com/in/amar-swar-026444406/',
+    accent: 'blue',
+    initials: 'AS',
   },
   {
-    id: 'member-2',
-    name: '[Name]',
-    role: '[Role]',
-    bio: '[Short bio]',
+    id: 'youssef-zaher',
+    name: 'Youssef Zaher',
+    role: 'AI Engineer',
+    linkedin: 'https://www.linkedin.com/in/youssef-zaher-fouda-a13a67356/',
     accent: 'cyan',
+    initials: 'YZ',
   },
   {
-    id: 'member-3',
-    name: '[Name]',
-    role: '[Role]',
-    bio: '[Short bio]',
-    accent: 'amber',
-  },
-  {
-    id: 'member-4',
-    name: '[Name]',
-    role: '[Role]',
-    bio: '[Short bio]',
+    id: 'mohamed-elbadaly',
+    name: 'Mohamed Elbadaly',
+    role: 'AI Engineer',
+    linkedin: 'https://www.linkedin.com/in/mo-elbadaly-61697431b/',
     accent: 'teal',
+    initials: 'ME',
+  },
+  {
+    id: 'marwan-amin',
+    name: 'Marwan Amin',
+    role: 'AI Engineer',
+    linkedin: 'https://www.linkedin.com/in/marwan-ibrahim-amin/',
+    accent: 'sky',
+    initials: 'MA',
+  },
+  {
+    id: 'ahmed-afandy',
+    name: 'Ahmed Afandy',
+    role: 'UI/UX & Frontend Engineer',
+    linkedin: 'https://www.linkedin.com/in/ahmed-afandy-a83480320/',
+    accent: 'blue',
+    initials: 'AA',
+  },
+  {
+    id: 'youssef-aly',
+    name: 'Youssef Aly',
+    role: 'DevSecOps Engineer specializing in Backend Systems',
+    linkedin: 'https://www.linkedin.com/in/youssef2-aly5/',
+    accent: 'cyan',
+    initials: 'YA',
   },
 ]
+
+export const SERVICES = [
+  {
+    id: 'erp',
+    title: 'ERP Systems',
+    body: 'Connected software to help organize business workflows and information.',
+  },
+  {
+    id: 'saas',
+    title: 'SaaS Products',
+    body: 'Digital products designed to deliver useful services through the web.',
+  },
+  {
+    id: 'websites',
+    title: 'Websites',
+    body: 'Purposeful websites that present your business and make it easy for people to connect with you.',
+  },
+  {
+    id: 'applications',
+    title: 'Applications',
+    body: 'Applications built around a specific task, for people and businesses that need their own software.',
+  },
+] as const
